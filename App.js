@@ -18,38 +18,15 @@ import {
 
 import {} from 'react-native/Libraries/NewAppScreen';
 
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import BottomTab from './components/BottomTabComponent'
+import TopSearchComponent from './components/TopSearchComponent'
 
 export default class App extends React.Component {
 
   constructor(props) {
     super(props)
 
-    this.state = {
-      BottomTab: null
-    }
-
   } // constructor end
-
-  createBottomTabNavigator() {
-   
-    const bottomTab = createBottomTabNavigator()
-
-    return bottomTab
-  }
-
-  indexScreen() {
-    return (
-      <Text>home</Text>
-    )
-  }
-
-  setScreen() {
-    return (
-      <Text>Account</Text>
-    )
-  }
 
   topSearch() {
     return (
@@ -57,30 +34,37 @@ export default class App extends React.Component {
     )
   }
 
+
+
   componentDidMount() {
     
   }
 
   render() {
 
-    const BottomTab = this.createBottomTabNavigator()
-    
     return (
       <>
         <StatusBar/>
-        <SafeAreaView style={{flex: 1,backgroundColor: '#eaeaea'}}>
-          <View>
-            <Text>topSearch</Text>
+        <SafeAreaView
+          style={styles.flex_1}
+          >
+          <View style={{height: 70, backgroundColor: '#f6f6f6'}}>
+            <TopSearchComponent/>
           </View>
-          <NavigationContainer>
-              <BottomTab.Navigator>
-                <BottomTab.Screen name='首頁' component={ this.indexScreen }></BottomTab.Screen>
-                <BottomTab.Screen name='設定' component={ this.setScreen }></BottomTab.Screen>
-              </BottomTab.Navigator>
-          </NavigationContainer>
+          <View
+            style={styles.flex_1}
+            >
+            <BottomTab/>
+          </View>
         </SafeAreaView>
       </>
-      
     )
   }
 } // class App end
+
+const styles = StyleSheet.create({
+  flex_1: {
+    flex: 1,
+    backgroundColor: '#eaeaea'
+  }
+})
