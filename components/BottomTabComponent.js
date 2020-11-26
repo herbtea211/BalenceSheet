@@ -58,6 +58,17 @@ export default class BottomTab extends React.Component {
             <BottomTab.Navigator
                 initialRouteName='Buy'
                 backBehavior='initialRoute'
+                sceneContainerStyle={{flex: 1, alignItems: 'center', justifyContent: 'center'}}
+                tabBarOptions={{
+                    activeTintColor: '#ffffff',
+                    inactiveTintColor: 'red',
+                    activeBackgroundColor: 'blue',
+                    inactiveBackgroundColor: 'green',
+                    tabStyle: {},
+                    showLabel: true,
+                    labelStyle: {},
+                    labelPosition: 'beside-icon'
+                }}
                 >
                 {screenConfig}
                 </BottomTab.Navigator>
