@@ -22,16 +22,12 @@ import NoticePageComponent from './ButtomTabItems/NoticePageComponent'
 import MemberPageComponent from './ButtomTabItems/MemberPageComponent'
 
 
+export class BottomTabNavigator extends React.Component {
 
+    render() {
 
-export default class BottomTab extends React.Component {
-    constructor(props) {
-        super(props)
-
-    }
-
-    bottomTabPageGroup() {
         const BottomTab = createBottomTabNavigator()
+
         const nameConfig = ['Home', 'Buy', 'Sale', 'Notice', 'Member']
         const componentConfig = [HomePageComponent, HaveBuyPageComponent, SalePageComponent, NoticePageComponent, MemberPageComponent]
         const iconConfig = [faHome, faShoppingBasket, faCloudUploadAlt, faExclamationCircle, faUser]
@@ -48,52 +44,34 @@ export default class BottomTab extends React.Component {
                                   return <FontAwesomeIcon icon={ iconConfig[i] }/>
                                 }
                               })}
-                              
                             >
                             </BottomTab.Screen>
             screenConfig.push(object)
         }
 
         return (
-            <BottomTab.Navigator
-                initialRouteName='Buy'
-                backBehavior='initialRoute'
-                sceneContainerStyle={{flex: 1, alignItems: 'center', justifyContent: 'center'}}
-                tabBarOptions={{
-                    activeTintColor: '#ffffff',
-                    inactiveTintColor: 'red',
-                    activeBackgroundColor: 'blue',
-                    inactiveBackgroundColor: 'green',
-                    tabStyle: {},
-                    showLabel: true,
-                    labelStyle: {},
-                    labelPosition: 'beside-icon'
-                }}
-                >
+            <BottomTab.Navigator>
                 {screenConfig}
-                </BottomTab.Navigator>
-
+            </BottomTab.Navigator>
         )
     }
+}
 
-    // testHome() {
-    //     return (
-    //         <Text>Home</Text>
-    //     )
-    // }
 
-    // testSale() {
-    //     return (
-    //         <Text>Sale</Text>
-    //     )
-    // }
+
+
+export default class BottomTab extends React.Component {
+    constructor(props) {
+        super(props)
+    }
 
     render() {
-
         return (
-            <NavigationContainer>
-                {this.bottomTabPageGroup()}
-            </NavigationContainer>
+            
+                <NavigationContainer>
+                    <BottomTabNavigator/>
+                </NavigationContainer>
+            
         )
     }
 }

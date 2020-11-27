@@ -28,12 +28,6 @@ export default class App extends React.Component {
 
   } // constructor end
 
-  topSearch() {
-    return (
-      <Text>topSearch</Text>
-    )
-  }
-
 
 
   componentDidMount() {
