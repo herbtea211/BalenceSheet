@@ -24,15 +24,20 @@ import MemberPageComponent from './ButtomTabItems/MemberPageComponent'
 
 export class BottomTabNavigator extends React.Component {
 
-    render() {
+    constructor(props) {
+        super(props)
 
-        const BottomTab = createBottomTabNavigator()
+    }
+
+    render() {
 
         const nameConfig = ['Home', 'Buy', 'Sale', 'Notice', 'Member']
         const componentConfig = [HomePageComponent, HaveBuyPageComponent, SalePageComponent, NoticePageComponent, MemberPageComponent]
         const iconConfig = [faHome, faShoppingBasket, faCloudUploadAlt, faExclamationCircle, faUser]
 
         const screenConfig = []
+
+        const BottomTab = createBottomTabNavigator()
 
         for(let i = 0;i < nameConfig.length;i++) {
             let object = <BottomTab.Screen
@@ -51,7 +56,7 @@ export class BottomTabNavigator extends React.Component {
 
         return (
             <BottomTab.Navigator>
-                {screenConfig}
+                { screenConfig }
             </BottomTab.Navigator>
         )
     }
@@ -63,15 +68,15 @@ export class BottomTabNavigator extends React.Component {
 export default class BottomTab extends React.Component {
     constructor(props) {
         super(props)
+
     }
 
     render() {
+        
         return (
-            
-                <NavigationContainer>
-                    <BottomTabNavigator/>
-                </NavigationContainer>
-            
+            <NavigationContainer>
+                <BottomTabNavigator/>
+            </NavigationContainer>
         )
     }
 }
