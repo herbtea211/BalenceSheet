@@ -42,10 +42,10 @@ export default class MenuComponent extends React.Component {
 
         return (
             <View
-                style={[styles.MenuStyle, {top: this.setStatusBarHeight(), backgroundColor: bgColor}]}
+                style={[styles.MenuStyle, {top: this.setStatusBarHeight(), backgroundColor: '#000000'}]}
                 >
                     <Text
-                        style={{}}
+                        style={{color: 'red'}}
                         >MenuComponent</Text>
                 </View>
         )
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 0,
         right: 0,
-        left: 100,
+        left: 0,
         bottom: 0,
         zIndex: 10000
     }
