@@ -1,24 +1,40 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React,{Component} from 'react';
 import {
-  Text
+  DeviceEventEmitter,
+  Text,
+  TouchableHighlight,
+  View,
+  Button
 } from 'react-native';
 
 
 
-export default class TopSearchComponent extends React.Component {
+export default class TopSearchComponent extends Component {
+
+    state = {
+       
+    }
+
     constructor(props) {
         super(props)
 
     }
 
-    
+    emitMenuComponent() {
+        DeviceEventEmitter.emit('toggleMenu')
+    }
 
     render() {
+
         return (
-            <>
-                <Text>TopSearchComponent</Text>
-            </>
+            <View>
+                <TouchableHighlight
+                    onPress={this.emitMenuComponent}
+                    >
+                    <Text>menu</Text>
+                    </TouchableHighlight>
+            </View>
         )
         
     }

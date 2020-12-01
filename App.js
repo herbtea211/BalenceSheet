@@ -1,38 +1,39 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
 
-import 'react-native-gesture-handler';
 import React from 'react';
 import {
   StyleSheet,
   StatusBar,
   View,
   Text,
-  SafeAreaView
+  SafeAreaView,
+  Button,
+  TouchableHighlight,
+  DeviceEventEmitter
 } from 'react-native';
 
 import {} from 'react-native/Libraries/NewAppScreen';
 
-import BottomTab from './components/BottomTabComponent'
+// import BottomTab from './components/BottomTabComponent'
 import TopSearchComponent from './components/TopSearchComponent'
+import MenuComponent from './components/MenuComponent'
 
 export default class App extends React.Component {
+
+
 
   constructor(props) {
     super(props)
 
+
+
   } // constructor end
 
-
-
-  componentDidMount() {
-    
+  state = {
+    data: 0,
+    menuListener: null,
+    showMenu: false
   }
+
 
   render() {
 
@@ -42,23 +43,41 @@ export default class App extends React.Component {
         <SafeAreaView
           style={styles.flex_1}
           >
-          <View style={{height: 70, backgroundColor: '#f6f6f6'}}>
-            <TopSearchComponent/>
-          </View>
-          <View
-            style={styles.flex_1}
+            <TouchableHighlight
+            onPress={() => {
+              this.setState({showMenu: !this.state.showMenu})
+            }}
             >
-            <BottomTab/>
-          </View>
+              <Text>open</Text>
+            </TouchableHighlight>
+            <TopSearchComponent/>
+            <MenuComponent
+              isShowMenu={this.state.showMenu}
+              />
+          
         </SafeAreaView>
       </>
     )
+  }
+
+  componentDidMount() {
+
+  //   this.state.menuListener = DeviceEventEmitter.addListener('toggleMenu', () => {
+  //     this.setState({ showMenu: !this.state.showMenu })
+  //     console.log('this.state.showMenu', this.state.showMenu)
+  // })
+
+    
+  }
+
+  componentWillUnmount() {
+    // this.state.menuListener.remove()
   }
 } // class App end
 
 const styles = StyleSheet.create({
   flex_1: {
     flex: 1,
-    backgroundColor: '#eaeaea'
+    position: 'relative'
   }
 })
