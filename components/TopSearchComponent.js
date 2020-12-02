@@ -30,7 +30,9 @@ export default class TopSearchComponent extends Component {
         return (
             <View>
                 <TouchableHighlight
-                    onPress={this.emitMenuComponent}
+                    onPress={() => {
+                        this.props.setStateShowMenu()
+                    }}
                     >
                     <Text>menu</Text>
                     </TouchableHighlight>

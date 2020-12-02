@@ -34,6 +34,10 @@ export default class App extends React.Component {
     showMenu: false
   }
 
+  _setStateShowMenu() {
+    this.setState({showMenu: !this.state.showMenu})
+  }
+
 
   render() {
 
@@ -43,18 +47,13 @@ export default class App extends React.Component {
         <SafeAreaView
           style={styles.flex_1}
           >
-            <TouchableHighlight
-            onPress={() => {
-              this.setState({showMenu: !this.state.showMenu})
-            }}
-            >
-              <Text>open</Text>
-            </TouchableHighlight>
-            <TopSearchComponent/>
-            <MenuComponent
-              isShowMenu={this.state.showMenu}
-              />
-          
+          <TopSearchComponent
+            setStateShowMenu={this._setStateShowMenu.bind(this)}
+            />
+          <MenuComponent
+            isShowMenu={this.state.showMenu}
+            setStateShowMenu={this._setStateShowMenu.bind(this)}
+            />
         </SafeAreaView>
       </>
     )
@@ -62,16 +61,10 @@ export default class App extends React.Component {
 
   componentDidMount() {
 
-  //   this.state.menuListener = DeviceEventEmitter.addListener('toggleMenu', () => {
-  //     this.setState({ showMenu: !this.state.showMenu })
-  //     console.log('this.state.showMenu', this.state.showMenu)
-  // })
-
-    
   }
 
   componentWillUnmount() {
-    // this.state.menuListener.remove()
+   
   }
 } // class App end
 

@@ -7,7 +7,9 @@ import {
     Text,
     View,
     Platform,
-    NativeModules
+    NativeModules,
+    Dimensions,
+    Button
 } from 'react-native';
 
 
@@ -19,44 +21,68 @@ export default class MenuComponent extends React.Component {
         super(props)
 
         this.state = {
-            moveAnim: new Animated.ValueXY({x: -100, y: -200})
+            moveAnim: new Animated.ValueXY(),
+            winSize: {}
         }
 
+        this.state.winSize.w = Dimensions.get('window').width
+        this.state.winSize.h = Dimensions.get('window').height
     }
 
-    setStatusBarHeight() {
+    _getStatusBarHeight() {
         const { StatusBarManager } = NativeModules
         return (Platform.OS === 'ios') ? StatusBarManager.HEIGHT : 0
+    }
+
+    _displayDrawerMenu(open) {
+
+        let moveX = open ? 0 : -(this.state.winSize.w)
+
+        Animated.spring(
+            this.state.moveAnim,
+            {
+                toValue: {x: moveX, y: 0},
+                duration: 500,
+                useNativeDriver: true
+            }
+        ).start()
     }
  
 
     render() {
 
-        return (
-            <View
-                style={[styles.MenuStyle, {top: this.setStatusBarHeight(), backgroundColor: '#000000'}]}
-                >
-                    <Text
-                        style={{color: 'red'}}
-                        >MenuComponent</Text>
-                    <Animated.View
-                    style={{width: 200, height: 200, backgroundColor: 'blue', transform: this.state.moveAnim.getTranslateTransform()}}
-                    >
+        this._displayDrawerMenu(this.props.isShowMenu)
 
-                    </Animated.View>
-                </View>
+        return (
+            <Animated.View
+            style={
+                [
+                    styles.MenuStyle,
+                    {
+                        top: this._getStatusBarHeight(),
+                        width: this.state.winSize.w,
+                        height: this.state.winSize.h - this._getStatusBarHeight(),
+                        backgroundColor: '#000000',
+                        transform: this.state.moveAnim.getTranslateTransform()
+                    }
+                ]}
+            >
+                <Text
+                style={{color: 'red'}}
+                >MenuComponent</Text>
+                <Button
+                title='back'
+                onPress={() => {
+                    this.props.setStateShowMenu()
+                }}
+                ></Button>
+
+                </Animated.View>
         )
     }
 
     componentDidMount() {
-        Animated.spring(
-            this.state.moveAnim,
-            {
-                toValue: {x: 200, y: 200},
-                duration: 10000,
-                useNativeDriver: true
-            }
-        ).start()
+
     }
 }
 
