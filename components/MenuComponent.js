@@ -1,6 +1,8 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import {
+    Animated,
+    Easing,
     StyleSheet,
     Text,
     View,
@@ -16,13 +18,10 @@ export default class MenuComponent extends React.Component {
     constructor(props) {
         super(props)
 
-        console.log('here2', this.props.isShowMenu)
+        this.state = {
+            moveAnim: new Animated.ValueXY({x: -100, y: -200})
+        }
 
-    }
-
-    state = {
-        statusBarH: 0
-        
     }
 
     setStatusBarHeight() {
@@ -33,13 +32,6 @@ export default class MenuComponent extends React.Component {
 
     render() {
 
-        console.log('here3', this.props.isShowMenu)
-
-        let bgColor = this.props.isShowMenu ? 'red' : 'blue'
-
-        
-
-
         return (
             <View
                 style={[styles.MenuStyle, {top: this.setStatusBarHeight(), backgroundColor: '#000000'}]}
@@ -47,12 +39,24 @@ export default class MenuComponent extends React.Component {
                     <Text
                         style={{color: 'red'}}
                         >MenuComponent</Text>
+                    <Animated.View
+                    style={{width: 200, height: 200, backgroundColor: 'blue', transform: this.state.moveAnim.getTranslateTransform()}}
+                    >
+
+                    </Animated.View>
                 </View>
         )
     }
 
     componentDidMount() {
-        // DeviceEventEmitter.addListener
+        Animated.spring(
+            this.state.moveAnim,
+            {
+                toValue: {x: 200, y: 200},
+                duration: 10000,
+                useNativeDriver: true
+            }
+        ).start()
     }
 }
 
