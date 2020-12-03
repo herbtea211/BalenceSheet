@@ -3,17 +3,12 @@ import React from 'react';
 import {
   StyleSheet,
   StatusBar,
-  View,
-  Text,
   SafeAreaView,
-  Button,
-  TouchableHighlight,
-  DeviceEventEmitter
 } from 'react-native';
 
 import {} from 'react-native/Libraries/NewAppScreen';
 
-// import BottomTab from './components/BottomTabComponent'
+import BottomTab from './components/BottomTabComponent'
 import TopSearchComponent from './components/TopSearchComponent'
 import MenuComponent from './components/MenuComponent'
 
@@ -45,15 +40,13 @@ export default class App extends React.Component {
       <>
         <StatusBar/>
         <SafeAreaView
-          style={styles.flex_1}
-          >
+          style={styles.flex_1}>
           <TopSearchComponent
-            setStateShowMenu={this._setStateShowMenu.bind(this)}
-            />
+            setStateShowMenu={this._setStateShowMenu.bind(this)}/>
+          <BottomTab/>
           <MenuComponent
             isShowMenu={this.state.showMenu}
-            setStateShowMenu={this._setStateShowMenu.bind(this)}
-            />
+            setStateShowMenu={this._setStateShowMenu.bind(this)}/>
         </SafeAreaView>
       </>
     )

@@ -1,38 +1,30 @@
 import 'react-native-gesture-handler';
 import React,{Component} from 'react';
 import {
-  DeviceEventEmitter,
-  Text,
-  TouchableHighlight,
-  View,
-  Button
+    StyleSheet,
+    Text,
+    TouchableHighlight,
+    View
 } from 'react-native';
 
 
 
 export default class TopSearchComponent extends Component {
 
-    state = {
-       
-    }
-
     constructor(props) {
         super(props)
 
     }
 
-    emitMenuComponent() {
-    }
-
     render() {
 
         return (
-            <View>
+            <View
+                style={styles.topSearchBarStyle}>
                 <TouchableHighlight
                     onPress={() => {
                         this.props.setStateShowMenu()
-                    }}
-                    >
+                    }}>
                         <Text>openMenu</Text>
                     </TouchableHighlight>
             </View>
@@ -40,4 +32,13 @@ export default class TopSearchComponent extends Component {
         
     }
 }
+
+const styles = StyleSheet.create({
+    topSearchBarStyle: {
+        backgroundColor: '#eaeaea',
+        height: 70,
+        alignItems: 'center',
+        justifyContent: 'center',
+    }
+})
 
