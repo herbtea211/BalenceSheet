@@ -18,94 +18,12 @@ import {
 
 export default class MenuComponent extends React.Component {
 
-    // constructor(props) {
-    //     super(props);
-
-    //     this.state = {
-    //         redValue: new Animated.Value(0),
-    //         blueValue : new Animated.Value(0)
-    //     };
-
-    //     this.staggerAnimated = Animated.stagger(2000,
-    //         [
-    //             Animated.timing(
-    //                 this.state.redValue,
-    //                 {
-    //                     toValue: 1,
-    //                     duration: 5000,
-    //                     easing: Easing.in,
-    //                 }
-    //             ),
-    //             Animated.timing(
-    //                 this.state.blueValue,
-    //                 {
-    //                     toValue: 1,
-    //                     duration: 5000,
-    //                     easing: Easing.in,
-    //                 }
-    //             ),
-    //         ]
-    //     );
-    // }
-
-    // _startAnimated() {
-    //     this.staggerAnimated.start();
-    // }
-
-    // render(){
-
-    //     const redMarginLeft = this.state.redValue.interpolate({
-    //         inputRange: [0,1],
-    //         outputRange: [0,200]
-    //     });
-
-    //     const blueMarginLeft = this.state.blueValue.interpolate({
-    //         inputRange: [0,1],
-    //         outputRange: [0,200]
-    //     });
-
-    //     return (
-    //         <View style={styles.mainStyle}>
-
-    //             {/*// 红色*/}
-    //             <Animated.View
-    //                 style={{
-    //                     width: 100,
-    //                     height: 100,
-    //                     backgroundColor:'red',
-    //                     marginLeft:redMarginLeft,
-    //                 }}
-    //             >
-    //                                 {/*// 蓝色*/}
-    //                 <Animated.View
-    //                     style={{
-    //                         width: 100,
-    //                         height: 100,
-    //                         backgroundColor:'blue',
-    //                         marginLeft:blueMarginLeft,
-    //                     }}
-    //                 >
-    //                 </Animated.View>
-    //             </Animated.View>
-
-
-
-
-    //             <TouchableOpacity style={styles.touchStyle} onPress={this._startAnimated.bind(this)}>
-    //                 <Text style={{width:200,height:100,textAlign:'center',lineHeight:100}}>点击开始动画</Text>
-    //             </TouchableOpacity>
-    //         </View>
-    //     );
-    // }
-
     constructor(props) {
         super(props)
 
         this.state = {
             moveAnim: new Animated.ValueXY(),
-            winSize: {},
-            whileBox: new Animated.Value(0),
-            redBox: new Animated.Value(1)
+            winSize: {}
         }
 
 
@@ -117,32 +35,6 @@ export default class MenuComponent extends React.Component {
     _getStatusBarHeight() {
         const { StatusBarManager } = NativeModules
         return (Platform.OS === 'ios') ? StatusBarManager.HEIGHT : 0
-    }
-
-    _opacityFade() {
-
-        Animated.stagger(
-            1000,
-            [
-                Animated.timing(
-                    this.state.whileBox,
-                    {
-                        toValue: 1,
-                        duration: 5000,
-                        useNativeDriver: true
-                    }
-                ),
-                Animated.timing(
-                    this.state.redBox,
-                    {
-                        toValue: 0,
-                        duration: 1000,
-                        useNativeDriver: true
-                    }
-                )
-            ]
-        ).start()
-
     }
 
     _displayDrawerMenu(open) {
@@ -174,44 +66,16 @@ export default class MenuComponent extends React.Component {
                             top: this._getStatusBarHeight(),
                             width: this.state.winSize.w,
                             height: this.state.winSize.h - this._getStatusBarHeight(),
-                            backgroundColor: '#000000',
                             transform: this.state.moveAnim.getTranslateTransform()
                         }
                     ]}
                 >
-                <Text
-                    style={{color: 'red'}}
-                    >MenuComponent</Text>
                 <Button
-                    title='back'
+                    title='closeMenu'
                     onPress={() => {
                         this.props.setStateShowMenu()
                     }}
                     ></Button>
-                <Button
-                    title='opacityFade'
-                    onPress={() => {
-                        this._opacityFade()
-                    }}
-                    ></Button>
-                <Animated.View
-                    style={{
-                        width: 200,
-                        height: 200,
-                        backgroundColor: '#fff',
-                        opacity: this.state.whileBox
-                    }}
-                    >
-                </Animated.View>
-                <Animated.View
-                    style={{
-                        width: 200,
-                        height: 200,
-                        backgroundColor: 'red',
-                        opacity: this.state.redBox
-                    }}
-                    >
-                </Animated.View>
             </Animated.View>
 
 
@@ -231,6 +95,9 @@ const styles = StyleSheet.create({
         right: 0,
         left: 0,
         bottom: 0,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
         zIndex: 10000
     }
 })
