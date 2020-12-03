@@ -22,7 +22,6 @@ export default class TopSearchComponent extends Component {
     }
 
     emitMenuComponent() {
-        DeviceEventEmitter.emit('toggleMenu')
     }
 
     render() {
@@ -34,10 +33,11 @@ export default class TopSearchComponent extends Component {
                         this.props.setStateShowMenu()
                     }}
                     >
-                    <Text>menu</Text>
+                        <Text>openMenu</Text>
                     </TouchableHighlight>
             </View>
         )
         
     }
 }
+
