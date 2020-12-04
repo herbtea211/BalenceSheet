@@ -12,22 +12,22 @@ export class SearchBar extends Component {
     constructor(props) {
         super(props)
         this.state = {
-
+            searchBarText: ''
         }
     }
 
     render() {
 
-        // const [value, onChangeText] = React.useState('Useless Placeholder');
         return (
             <>
                 <TextInput
-                style={styles.searchBarStyle}
-                // onChangeText={() => {
-
-                // }}
-                value={'我想找...'}
-                ></TextInput>
+                    style={ styles.searchBarStyle }
+                    placeholder='我想找...'
+                    onTextInput={(e) => {
+                        console.log('e', e.nativeEvent.previousText)
+                    }}
+                    secureTextEntry={true}
+                    ></TextInput>
             </>
         )
     }
@@ -127,4 +127,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#f6f6f6'
     }
 })
+
+
+
 
