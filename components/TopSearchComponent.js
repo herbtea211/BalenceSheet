@@ -11,9 +11,11 @@ import {
 export class SearchBar extends Component {
     constructor(props) {
         super(props)
+
         this.state = {
             searchBarText: ''
         }
+
     }
 
     render() {
@@ -21,13 +23,12 @@ export class SearchBar extends Component {
         return (
             <>
                 <TextInput
-                    style={ styles.searchBarStyle }
-                    placeholder='我想找...'
-                    onTextInput={(e) => {
-                        console.log('e', e.nativeEvent.previousText)
-                    }}
-                    secureTextEntry={true}
-                    ></TextInput>
+                style={ styles.searchBarStyle }
+                placeholder='我想找...'
+                onChangeText={(value) => {
+                    this.setState({searchBarText: value})
+                }}
+                ></TextInput>
             </>
         )
     }
@@ -78,7 +79,6 @@ export default class TopSearchComponent extends Component {
     }
 
     render() {
-
         return (
             <View
                 style={styles.topSearchBarStyle}>
@@ -127,6 +127,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#f6f6f6'
     }
 })
+
+
+
 
 
 
