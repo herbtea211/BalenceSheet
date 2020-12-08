@@ -8,6 +8,10 @@ import {
     TextInput
 } from 'react-native';
 
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { faCommentDots } from '@fortawesome/free-solid-svg-icons'
+
+
 export class SearchBar extends Component {
     constructor(props) {
         super(props)
@@ -89,7 +93,12 @@ export default class TopSearchComponent extends Component {
                         <MenuBtnComponent/>
                     </TouchableOpacity>
                 <SearchBar/>
-                <Text>bar</Text>
+                <TouchableOpacity
+                    onPress={() => {
+                        this.props.setStateShowCar()
+                    }}>
+                        <FontAwesomeIcon icon={ faCommentDots }/>
+                    </TouchableOpacity>
             </View>
         )
         

@@ -26,10 +26,13 @@ export default class MenuComponent extends React.Component {
             winSize: {}
         }
 
+       
 
+    }
+
+    _setStateWinSize() {
         this.state.winSize.w = Dimensions.get('window').width
         this.state.winSize.h = Dimensions.get('window').height
-
     }
 
     _getStatusBarHeight() {
@@ -39,20 +42,39 @@ export default class MenuComponent extends React.Component {
 
     _displayDrawerMenu(open) {
 
-        let moveX = open ? 0 : -(this.state.winSize.w)
+        if(this.props.openToRight) {
 
-        Animated.spring(
-            this.state.moveAnim,
-            {
-                toValue: {x: moveX, y: 0},
-                overshootClamping: !open,
-                useNativeDriver: true
-            }
-        ).start()
+            let moveX = open ? 0 : -(this.state.winSize.w)
+
+            Animated.spring(
+                this.state.moveAnim,
+                {
+                    toValue: {x: moveX, y: 0},
+                    overshootClamping: !open,
+                    useNativeDriver: true
+                }
+            ).start()
+
+        } else {
+            let moveX = open ? 0 : this.state.winSize.w
+
+            Animated.spring(
+                this.state.moveAnim,
+                {
+                    toValue: {x: moveX, y: 0},
+                    overshootClamping: !open,
+                    useNativeDriver: true
+                }
+            ).start()
+        }
+
+
     }
  
 
     render() {
+        
+        this._setStateWinSize()
 
         this._displayDrawerMenu(this.props.isShowMenu)
 

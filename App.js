@@ -26,11 +26,16 @@ export default class App extends React.Component {
   state = {
     data: 0,
     menuListener: null,
-    showMenu: false
+    showMenu: false,
+    showCar: false
   }
 
   _setStateShowMenu() {
     this.setState({showMenu: !this.state.showMenu})
+  }
+
+  _setStateShowCar() {
+    this.setState({showCar: !this.state.showCar})
   }
 
 
@@ -40,13 +45,19 @@ export default class App extends React.Component {
       <>
         <StatusBar/>
         <SafeAreaView
-          style={styles.flex_1}>
+        style={styles.flex_1}>
           <TopSearchComponent
-            setStateShowMenu={this._setStateShowMenu.bind(this)}/>
+          setStateShowCar={this._setStateShowCar.bind(this)}
+          setStateShowMenu={this._setStateShowMenu.bind(this)}/>
           <BottomTab/>
           <MenuComponent
-            isShowMenu={this.state.showMenu}
-            setStateShowMenu={this._setStateShowMenu.bind(this)}/>
+          openToRight={true}
+          isShowMenu={this.state.showMenu}
+          setStateShowMenu={this._setStateShowMenu.bind(this)}/>
+          <MenuComponent
+          openToRight={false}
+          isShowMenu={this.state.showCar}
+          setStateShowMenu={this._setStateShowCar.bind(this)}/>
         </SafeAreaView>
       </>
     )
